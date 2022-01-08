@@ -4,23 +4,35 @@
 		<meta charset="UTF-8"/>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta name="description" content="Make a Mystery Room!"/>
 		<title>Mystery Room Maker</title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 		<link rel="stylesheet" href="./mystery.css"/>
 	</head>
 	<body>
 		<div id="mysteryView">
-			<div class="mysteryEl">
-				<div class="editOption">
-					<span class="material-icons">&#xe3c9;</span>
+			<div class="section">
+				<div class="sHeader">
+					<div class="editOption">
+						<span class="material-icons">&#xe3c9;</span>
+					</div>
+					<h1></h1>
 				</div>
-				<div class="elContent">
-					<p>This is the text. It is part of the story and can be used for explaining.</p>
+				<div class="mysteryEl selected">
+					<div class="editOption">
+						<span class="material-icons">&#xe3c9;</span>
+					</div>
+					<div class="elContent">
+						<p>This is the text. It is part of the story and can be used for explaining.</p>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div id="separator"></div>
-		<div id="editPanel"></div>
+		<div id="editPanel">
+			<h1>Edit Panel</h1>
+			<p>To edit part of the mystery, press the <span class="material-icons md-text">&#xe3c9;</span> button next to it.</p>
+		</div>
 		<script src="./mystery.js"></script>
 	</body>
 </html>
