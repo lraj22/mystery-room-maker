@@ -54,41 +54,58 @@ function getNewEl(){
 	part.appendChild(content);
 	return part;
 }
+function onEdit(e,f){
+	e.onkeydown=e.onkeyup=e.onchange=f;
+}
 function activateSeEditBox(){
 	var selected=document.querySelector(".selected");
 	editBox.outerHTML=editBox.outerHTML;
 	updateElVars();
 	seTitle.value=selected.querySelector(".sHeader h1").textContent;
-	seTitle.onkeydown=seTitle.onkeyup=seTitle.onchange=function(){
+	onEdit(seTitle,function(){
 		selected.querySelector(".sHeader h1").textContent=seTitle.value;
-	};
-	deleteSe.onclick=function(){
-		selected.remove();
-		editBox.setAttribute("data-editing","none");
-		editBox.outerHTML=editBox.outerHTML;
-		updateElVars();
-	};
+	});
+}
+function updateElFromEdit(){
+	var selected=document.querySelector(".selected");
+	var type=selected.getAttribute("data-el-type");
+	var content=selected.childNodes[1];
+	if(type==="text")elText.value=content.textContent;
+	else if(type==="question"){
+		questionText.value=content.childNodes[0].textContent;
+		questionAns.value=content.childNodes[1].getAttribute("data-answer");
+	}
 }
 function activateElEditBox(){
 	var selected=document.querySelector(".selected");
+	var content=selected.childNodes[1];
 	editBox.outerHTML=editBox.outerHTML;
 	updateElVars();
 	var type=selected.getAttribute("data-el-type");
 	elEditBox.setAttribute("data-edit-type",type);
 	editTypeSelect.querySelector('option[selected="selected"]').removeAttribute("selected");
 	editTypeSelect.querySelector('option[value="'+type+'"]').setAttribute("selected","selected");
-	if(type==="text")elText.value=selected.childNodes[1].textContent;
+	updateElFromEdit();
 	editTypeSelect.onchange=function(){
-		selected.setAttribute("data-el-type",editTypeSelect.value);
-		elEditBox.setAttribute("data-edit-type",editTypeSelect.value);
+		var type=editTypeSelect.value;
+		selected.setAttribute("data-el-type",type);
+		elEditBox.setAttribute("data-edit-type",type);
+		if(type==="text")content.innerHTML=elText.value;
+		else if(type==="question"){
+			content.innerHTML='<p></p><input readonly="readonly" data-answer=""/>';
+			content.childNodes[0].textContent=questionText.value;
+			content.childNodes[1].setAttribute("data-answer",questionAns.value);
+		}
 	};
-	elText.onkeydown=elText.onkeyup=elText.onchange=function(){
-		document.querySelector(".selected").childNodes[1].textContent=elText.value;
-	};
-	deleteEl.onclick=function(){
-		clickFn.editSe(selected.parentElement.querySelector(".sHeader .material-icons"));
-		selected.remove();
-	};
+	onEdit(elText,function(){
+		selected.childNodes[1].textContent=elText.value;
+	});
+	onEdit(questionText,function(){
+		content.childNodes[0].textContent=questionText.value;
+	});
+	onEdit(questionAns,function(){
+		content.childNodes[1].setAttribute("data-answer",questionAns.value);
+	});
 }
 var clickFn={
 	"editSe":function(e){
@@ -111,6 +128,36 @@ var clickFn={
 		var part=getNewEl();
 		s.insertBefore(part,e.parentElement);
 		clickFn.editEl(part.childNodes[0].childNodes[0]);
+	},
+	"moveElUp":function(){
+		var selected=document.querySelector(".selected");
+		if(selected.previousElementSibling.className.indexOf("mysteryEl")!==-1){
+			selected.parentNode.insertBefore(selected,selected.previousElementSibling);
+		}else{
+			selected.parentNode.insertBefore(selected,selected.parentNode.lastElementChild);
+		}
+		activateElEditBox();
+	},
+	"moveElDown":function(){
+		var selected=document.querySelector(".selected");
+		if(selected.nextElementSibling.nextElementSibling){
+			selected.parentNode.insertBefore(selected,selected.nextElementSibling.nextElementSibling);
+		}else{
+			selected.parentNode.insertBefore(selected,selected.parentNode.firstElementChild.nextElementSibling.nextElementSibling);
+		}
+		activateElEditBox();
+	},
+	"deleteSe":function(){
+		var selected=document.querySelector(".selected");
+		selected.remove();
+		editBox.setAttribute("data-editing","none");
+		editBox.outerHTML=editBox.outerHTML;
+		updateElVars();
+	},
+	"deleteEl":function(){
+		var selected=document.querySelector(".selected");
+		clickFn.editSe(selected.parentElement.querySelector(".sHeader .material-icons"));
+		selected.remove();
 	}
 };
 window.addEventListener("load",function(){

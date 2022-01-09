@@ -75,7 +75,7 @@ body *{
 	flex-grow:1;
 }
 .sHeader h1:empty:before{
-	color:rgba(0, 0, 0, 0.22);
+	color:rgba(0,0,0,0.22);
 	content:"Untitled Section";
 }
 .addItem{
@@ -122,19 +122,55 @@ body *{
 [data-edit-type="text"]#elEditBox #editText,[data-edit-type="question"]#elEditBox #editQuestion,[data-edit-type="image"]#elEditBox #editImage{
 	display:block;
 }
+[data-el-type="question"].mysteryEl .elContent p:empty:before{
+	color:rgba(0,0,0,0.5);
+	content:"Enter question";
+}
 input{
 	border:0;
-	border-bottom:1px solid rgba(0,0,0,0.3);
+	border-bottom:2px solid rgba(0,0,0,0.3);
 	outline:none;
 	transition:all 300ms;
 	display:block;
 	margin:10px 0;
 }
 input:hover{
-	border-bottom-width:2px;
+	border-bottom-color:rgba(0,0,0,0.5);
 }
 input:focus{
-	border-bottom:2px solid blue;
+	border-bottom-color:blue;
+}
+button{
+	display:inline-flex;
+	flex-direction:row;
+	justify-content:center;
+	padding:0.7em 1.4em;
+	margin:0 0.3em 0.3em 0;
+	border-radius:0.15em;
+	box-sizing:border-box;
+	text-transform:uppercase;
+	font-weight:400;
+	box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+	text-align:center;
+	position:relative;
+	border:none;
+	outline:none;
+	transition:all 500ms;
+	color:black;
+	background-color:#00000018;
+}
+button *{
+	pointer-events:none;
+}
+.danger{
+	background-color:#ff2333dd;
+	color:white;
+}
+.danger:hover{
+	background-color:#ff2333ee;
+}
+button:active{
+	top:0.1em;
 }
 textarea{
 	width:100%;
@@ -168,4 +204,6 @@ textarea{
 .material-icons.md-text{
 	pointer-events:none;
 	padding:0 4px;
+	color:inherit;
+	font-size:16px;
 }
