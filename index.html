@@ -29,13 +29,13 @@
 		<div id="separator"></div>
 		<div id="editPanel">
 			<h1>Edit Panel</h1>
-			<p>To edit part of the mystery, press the <span class="material-icons md-text">&#xe3c9;</span> icon next to it.</p>
-			<p>To add a new part, click the <span class="material-icons md-text">&#xe145;</span> icon to insert it there.</p>
+			<p>The pencil icon starts editing the form piece next to it.</p>
+			<p>If you want to add a new part, click the plus icon to insert it there.</p>
 			<div id="editBox" data-editing="none">
 				<div id="seEditBox">
 					<p>Title of section:</p>
 					<input id="seTitle"/>
-					<button id="deleteSe">Delete</button>
+					<button id="deleteSe" class="danger" data-click-fn="deleteSe"><span class="material-icons md-text">&#xe14c;</span><span>Delete Section</span></button>
 				</div>
 				<div id="elEditBox" data-edit-type="none">
 					<p>Current type: <select id="editTypeSelect">
@@ -57,7 +57,10 @@
 						<p>Image file:</p>
 						<input type="file" id="imageFile"/>
 					</div>
-					<button id="deleteEl">Delete</button>
+					<br/>
+					<button id="moveElUp" data-click-fn="moveElUp"><span class="material-icons md-text">&#xeb64;</span><span>Move up</span></button>
+					<button id="moveElDown" data-click-fn="moveElDown"><span class="material-icons md-text">&#xeb61;</span><span>Move down</span></button><br/><br/>
+					<button id="deleteEl" class="danger" data-click-fn="deleteEl"><span class="material-icons md-text">&#xe14c;</span><span>Delete</span></button>
 				</div>
 			</div>
 		</div>
