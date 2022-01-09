@@ -95,6 +95,8 @@ function activateElEditBox(){
 			content.innerHTML='<p></p><input readonly="readonly" data-answer=""/>';
 			content.childNodes[0].textContent=questionText.value;
 			content.childNodes[1].setAttribute("data-answer",questionAns.value);
+		}else if(type==="image"){
+			content.innerHTML='<img/><p class="caption"></p>';
 		}
 	};
 	onEdit(elText,function(){
@@ -106,6 +108,19 @@ function activateElEditBox(){
 	onEdit(questionAns,function(){
 		content.childNodes[1].setAttribute("data-answer",questionAns.value);
 	});
+	onEdit(imageCaption,function(){
+		content.childNodes[1].textContent=imageCaption.value;
+	});
+	imageFile.onchange=function(){
+		if(imageFile.files.length!==0){
+			var file=imageFile.files[0];
+			var fr=new FileReader();
+			fr.onload=function(){
+				if(fr.result.slice(0,11)==="data:image/")content.childNodes[0].src=fr.result;
+			};
+			fr.readAsDataURL(file);
+		}
+	};
 }
 var clickFn={
 	"editSe":function(e){
@@ -128,6 +143,24 @@ var clickFn={
 		var part=getNewEl();
 		s.insertBefore(part,e.parentElement);
 		clickFn.editEl(part.childNodes[0].childNodes[0]);
+	},
+	"moveSeUp":function(){
+		var selected=document.querySelector(".selected");
+		if(selected.previousElementSibling){
+			selected.parentNode.insertBefore(selected,selected.previousElementSibling);
+		}else{
+			selected.parentNode.insertBefore(selected,selected.parentNode.lastElementChild);
+		}
+		activateSeEditBox();
+	},
+	"moveSeDown":function(){
+		var selected=document.querySelector(".selected");
+		if(selected.nextElementSibling.nextElementSibling){
+			selected.parentNode.insertBefore(selected,selected.nextElementSibling.nextElementSibling);
+		}else{
+			selected.parentNode.insertBefore(selected,selected.parentNode.firstElementChild);
+		}
+		activateSeEditBox();
 	},
 	"moveElUp":function(){
 		var selected=document.querySelector(".selected");
@@ -158,6 +191,9 @@ var clickFn={
 		var selected=document.querySelector(".selected");
 		clickFn.editSe(selected.parentElement.querySelector(".sHeader .material-icons"));
 		selected.remove();
+	},
+	"promptImageUpload":function(){
+		imageFile.click();
 	}
 };
 window.addEventListener("load",function(){
