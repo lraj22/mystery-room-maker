@@ -113,8 +113,8 @@ body *{
 [data-edit-type="none"]#elEditBox{
 	display:none;
 }
-#elEditBox p{
-	margin-top:0;
+#editBox p{
+	margin:0;
 }
 #editText,#editQuestion,#editImage{
 	display:none;
@@ -126,6 +126,10 @@ body *{
 	color:rgba(0,0,0,0.5);
 	content:"Enter question";
 }
+.caption{
+	font-size:smaller;
+	color:rgba(0,0,0,0.8);
+}
 input{
 	border:0;
 	border-bottom:2px solid rgba(0,0,0,0.3);
@@ -133,17 +137,19 @@ input{
 	transition:all 300ms;
 	display:block;
 	margin:10px 0;
+	width:40%;
+}
+input[type="file"]{
+	display:none;
 }
 input:hover{
 	border-bottom-color:rgba(0,0,0,0.5);
 }
 input:focus{
-	border-bottom-color:blue;
+	border-bottom-color:cornflowerblue;
 }
 button{
 	display:inline-flex;
-	flex-direction:row;
-	justify-content:center;
 	padding:0.7em 1.4em;
 	margin:0 0.3em 0.3em 0;
 	border-radius:0.15em;
@@ -161,6 +167,7 @@ button{
 }
 button *{
 	pointer-events:none;
+	margin:auto;
 }
 .danger{
 	background-color:#ff2333dd;
@@ -169,6 +176,13 @@ button *{
 .danger:hover{
 	background-color:#ff2333ee;
 }
+.action{
+	color:white;
+	background-color:#0066bbdd;
+}
+.action:hover{
+	background-color:#0066bbee;
+}
 button:active{
 	top:0.1em;
 }
@@ -176,6 +190,9 @@ textarea{
 	width:100%;
 	height:200px;
 	resize:vertical;
+}
+.mysteryEl img{
+	max-width:100%;
 }
 .material-icons{
 	color:rgba(0,0,0,0.54);

@@ -35,6 +35,9 @@
 				<div id="seEditBox">
 					<p>Title of section:</p>
 					<input id="seTitle"/>
+					<br/><hr/><br/>
+					<button id="moveSeUp" data-click-fn="moveSeUp"><span class="material-icons md-text">&#xeb64;</span><span>Move up</span></button>
+					<button id="moveSeDown" data-click-fn="moveSeDown"><span class="material-icons md-text">&#xeb61;</span><span>Move down</span></button><br/><br/>
 					<button id="deleteSe" class="danger" data-click-fn="deleteSe"><span class="material-icons md-text">&#xe14c;</span><span>Delete Section</span></button>
 				</div>
 				<div id="elEditBox" data-edit-type="none">
@@ -42,7 +45,7 @@
 						<option value="text" selected="selected">Text</option>
 						<option value="question">Question</option>
 						<option value="image">Image</option>
-					</select></p>
+					</select></p><br/>
 					<div id="editText">
 						<p>Content of text element:</p>
 						<textarea id="elText"></textarea>
@@ -54,10 +57,12 @@
 						<input id="questionAns"/>
 					</div>
 					<div id="editImage">
-						<p>Image file:</p>
-						<input type="file" id="imageFile"/>
+						<button class="action" data-click-fn="promptImageUpload"><span class="material-icons md-text">&#xe2c6;</span><span>Upload Image</span></button>
+						<input type="file" id="imageFile" accept="image/*"/><br/><br/>
+						<p>Caption of the image (optional):</p>
+						<input id="imageCaption"/>
 					</div>
-					<br/>
+					<br/><hr/><br/>
 					<button id="moveElUp" data-click-fn="moveElUp"><span class="material-icons md-text">&#xeb64;</span><span>Move up</span></button>
 					<button id="moveElDown" data-click-fn="moveElDown"><span class="material-icons md-text">&#xeb61;</span><span>Move down</span></button><br/><br/>
 					<button id="deleteEl" class="danger" data-click-fn="deleteEl"><span class="material-icons md-text">&#xe14c;</span><span>Delete</span></button>
