@@ -11,7 +11,7 @@
 	</head>
 	<body>
 		<div id="mysteryView">
-			<div class="section selected">
+			<div class="section">
 				<div class="sHeader">
 					<div class="editOption">
 						<span class="material-icons" data-click-fn="editSe">&#xe3c9;</span>
@@ -22,14 +22,20 @@
 					<span class="material-icons" data-click-fn="elPlusBottom">&#xe145;</span>
 				</div>
 			</div>
+			<div class="addItem">
+				<span class="material-icons" data-click-fn="sePlusBottom">&#xe145;</span>
+			</div>
 		</div>
 		<div id="separator"></div>
 		<div id="editPanel">
 			<h1>Edit Panel</h1>
-			<p>To edit part of the mystery, press the <span class="material-icons md-text">&#xe3c9;</span> button next to it.</p>
-			<div id="editBox">
+			<p>To edit part of the mystery, press the <span class="material-icons md-text">&#xe3c9;</span> icon next to it.</p>
+			<p>To add a new part, click the <span class="material-icons md-text">&#xe145;</span> icon to insert it there.</p>
+			<div id="editBox" data-editing="none">
 				<div id="seEditBox">
-					
+					<p>Title of section:</p>
+					<input id="seTitle"/>
+					<button id="deleteSe">Delete</button>
 				</div>
 				<div id="elEditBox" data-edit-type="none">
 					<p>Current type: <select id="editTypeSelect">

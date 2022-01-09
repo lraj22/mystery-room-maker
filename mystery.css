@@ -71,6 +71,7 @@ body *{
 }
 .sHeader h1{
 	text-align:center;
+	padding:10px;
 	flex-grow:1;
 }
 .sHeader h1:empty:before{
@@ -95,12 +96,19 @@ body *{
 [data-el-type="text"] .elContent{
 	white-space:pre-wrap;
 }
+#editPanel,#editPanel input,#editPanel textarea{
+	font-size:18px;
+}
 #editPanel>h1{
 	margin:0;
 }
-#elEditBox{
+#seEditBox,#elEditBox{
 	border:1px solid black;
 	padding:16px;
+	display:none;
+}
+[data-editing="se"]#editBox #seEditBox,[data-editing="el"]#editBox #elEditBox{
+	display:block;
 }
 [data-edit-type="none"]#elEditBox{
 	display:none;
@@ -113,6 +121,20 @@ body *{
 }
 [data-edit-type="text"]#elEditBox #editText,[data-edit-type="question"]#elEditBox #editQuestion,[data-edit-type="image"]#elEditBox #editImage{
 	display:block;
+}
+input{
+	border:0;
+	border-bottom:1px solid rgba(0,0,0,0.3);
+	outline:none;
+	transition:all 300ms;
+	display:block;
+	margin:10px 0;
+}
+input:hover{
+	border-bottom-width:2px;
+}
+input:focus{
+	border-bottom:2px solid blue;
 }
 textarea{
 	width:100%;
