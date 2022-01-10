@@ -1,5 +1,5 @@
 function updateElVars(){
-	document.querySelectorAll("#editBox,#editBox [id]").forEach(function(el){
+	document.querySelectorAll("[id]").forEach(function(el){
 		window[el.id]=el;
 	});
 }
@@ -25,7 +25,11 @@ function createAddItem(type){
 }
 function deselect(){
 	var e=document.body.querySelector(".selected");
-	if(e)e.classList.remove("selected");
+	if(e){
+		e.classList.remove("selected");
+		editBox.setAttribute("data-editing","ex");
+		activateExEditBox();
+	}
 }
 function select(e){
 	deselect();
@@ -56,6 +60,16 @@ function getNewEl(){
 }
 function onEdit(e,f){
 	e.onkeydown=e.onkeyup=e.onchange=f;
+}
+function activateExEditBox(){
+	mysteryTitleInput.value=mysteryTitle.textContent;
+	endMessageInput.value=endMessage.textContent;
+	onEdit(mysteryTitleInput,function(){
+		mysteryTitle.textContent=mysteryTitleInput.value;
+	});
+	onEdit(endMessageInput,function(){
+		endMessage.textContent=endMessageInput.value;
+	});
 }
 function activateSeEditBox(){
 	var selected=document.querySelector(".selected");
@@ -144,9 +158,25 @@ var clickFn={
 		s.insertBefore(part,e.parentElement);
 		clickFn.editEl(part.childNodes[0].childNodes[0]);
 	},
+	"insertSeAbove":function(e){
+		var selected=document.querySelector(".selected");
+		selected.parentElement.insertBefore(getNewSe(),selected);
+	},
+	"insertSeBelow":function(e){
+		var selected=document.querySelector(".selected");
+		selected.parentElement.insertBefore(getNewSe(),selected.nextElementSibling);
+	},
+	"insertElAbove":function(e){
+		var selected=document.querySelector(".selected");
+		selected.parentElement.insertBefore(getNewEl(),selected);
+	},
+	"insertElBelow":function(e){
+		var selected=document.querySelector(".selected");
+		selected.parentElement.insertBefore(getNewEl(),selected.nextElementSibling);
+	},
 	"moveSeUp":function(){
 		var selected=document.querySelector(".selected");
-		if(selected.previousElementSibling){
+		if(selected.previousElementSibling.className.indexOf("section")!==-1){
 			selected.parentNode.insertBefore(selected,selected.previousElementSibling);
 		}else{
 			selected.parentNode.insertBefore(selected,selected.parentNode.lastElementChild);
@@ -158,7 +188,7 @@ var clickFn={
 		if(selected.nextElementSibling.nextElementSibling){
 			selected.parentNode.insertBefore(selected,selected.nextElementSibling.nextElementSibling);
 		}else{
-			selected.parentNode.insertBefore(selected,selected.parentNode.firstElementChild);
+			selected.parentNode.insertBefore(selected,selected.parentNode.firstElementChild.nextElementSibling);
 		}
 		activateSeEditBox();
 	},
@@ -183,7 +213,7 @@ var clickFn={
 	"deleteSe":function(){
 		var selected=document.querySelector(".selected");
 		selected.remove();
-		editBox.setAttribute("data-editing","none");
+		editBox.setAttribute("data-editing","ex");
 		editBox.outerHTML=editBox.outerHTML;
 		updateElVars();
 	},
@@ -194,6 +224,9 @@ var clickFn={
 	},
 	"promptImageUpload":function(){
 		imageFile.click();
+	},
+	"deselect":function(){
+		deselect();
 	}
 };
 window.addEventListener("load",function(){
@@ -204,5 +237,5 @@ window.addEventListener("load",function(){
 			(clickFn[fn]||function(){})(e.target);
 		}
 	});
-	clickFn.editSe(document.querySelector(".sHeader .material-icons"));
+	activateExEditBox();
 });
