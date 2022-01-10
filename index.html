@@ -11,6 +11,7 @@
 	</head>
 	<body>
 		<div id="mysteryView">
+			<h1 id="mysteryTitle"></h1>
 			<div class="section">
 				<div class="sHeader">
 					<div class="editOption">
@@ -25,22 +26,35 @@
 			<div class="addItem">
 				<span class="material-icons" data-click-fn="sePlusBottom">&#xe145;</span>
 			</div>
+			<div id="endMessage"></div>
 		</div>
 		<div id="separator"></div>
 		<div id="editPanel">
 			<h1>Edit Panel</h1>
 			<p>The pencil icon starts editing the form piece next to it.</p>
 			<p>If you want to add a new part, click the plus icon to insert it there.</p>
-			<div id="editBox" data-editing="none">
+			<div id="editBox" data-editing="ex">
+				<div id="exEditBox">
+					<h2>General</h2>
+					<p>Mystery title</p>
+					<input id="mysteryTitleInput"/><br/>
+					<p>Mystery finishers see this message:</p>
+					<textarea id="endMessageInput"></textarea>
+				</div>
 				<div id="seEditBox">
+					<h2>Section Editor</h2>
 					<p>Title of section:</p>
 					<input id="seTitle"/>
 					<br/><hr/><br/>
+					<button id="insertSeAbove" class="create" data-click-fn="insertSeAbove">Insert Section Above</button>
+					<button id="insertSeBelow" class="create" data-click-fn="insertSeBelow">Insert Section Below</button><br/><br/>
 					<button id="moveSeUp" data-click-fn="moveSeUp"><span class="material-icons md-text">&#xeb64;</span><span>Move up</span></button>
 					<button id="moveSeDown" data-click-fn="moveSeDown"><span class="material-icons md-text">&#xeb61;</span><span>Move down</span></button><br/><br/>
+					<button class="warning" data-click-fn="deselect"><span class="material-icons md-text">&#xebb6;</span><span>Deselect</span></button>
 					<button id="deleteSe" class="danger" data-click-fn="deleteSe"><span class="material-icons md-text">&#xe14c;</span><span>Delete Section</span></button>
 				</div>
 				<div id="elEditBox" data-edit-type="none">
+					<h2>Element Editor</h2>
 					<p>Current type: <select id="editTypeSelect">
 						<option value="text" selected="selected">Text</option>
 						<option value="question">Question</option>
@@ -63,8 +77,11 @@
 						<input id="imageCaption"/>
 					</div>
 					<br/><hr/><br/>
+					<button id="insertElAbove" class="create" data-click-fn="insertElAbove">Insert Above</button>
+					<button id="insertElBelow" class="create" data-click-fn="insertElBelow">Insert Below</button><br/><br/>
 					<button id="moveElUp" data-click-fn="moveElUp"><span class="material-icons md-text">&#xeb64;</span><span>Move up</span></button>
 					<button id="moveElDown" data-click-fn="moveElDown"><span class="material-icons md-text">&#xeb61;</span><span>Move down</span></button><br/><br/>
+					<button class="warning" data-click-fn="deselect"><span class="material-icons md-text">&#xebb6;</span><span>Deselect</span></button>
 					<button id="deleteEl" class="danger" data-click-fn="deleteEl"><span class="material-icons md-text">&#xe14c;</span><span>Delete</span></button>
 				</div>
 			</div>

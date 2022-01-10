@@ -64,6 +64,29 @@ body *{
 .mysteryEl.selected .material-icons{
 	color:green;
 }
+#mysteryTitle{
+	text-align:center;
+	margin:0;
+	padding:0.5em 0;
+	background-color:rgba(255,255,255,0.8);
+	border-bottom:2px dashed black;
+	position:sticky;
+	top:0;
+}
+#mysteryTitle:empty{
+	display:none;
+}
+#endMessage{
+	text-align:center;
+	padding:0.5em 1em;
+	border-top:2px solid black;
+	border-bottom:2px solid black;
+	width:80%;
+	margin:0 auto;
+}
+#endMessage:empty{
+	display:none;
+}
 .sHeader{
 	padding:0 5px;
 	display:flex;
@@ -93,7 +116,7 @@ body *{
 	padding:20px 15px;
 	flex-grow:1;
 }
-[data-el-type="text"] .elContent{
+#endMessage,[data-el-type="text"] .elContent{
 	white-space:pre-wrap;
 }
 #editPanel,#editPanel input,#editPanel textarea{
@@ -102,12 +125,17 @@ body *{
 #editPanel>h1{
 	margin:0;
 }
-#seEditBox,#elEditBox{
+#editPanel h2{
+	margin-top:0;
+}
+#editBox{
 	border:1px solid black;
 	padding:16px;
+}
+[data-editing="se"]#editBox #exEditBox,[data-editing="el"]#editBox #exEditBox,[data-editing="ex"]#editBox #seEditBox,[data-editing="el"]#editBox #seEditBox,[data-editing="ex"]#editBox #elEditBox,[data-editing="se"]#editBox #elEditBox{
 	display:none;
 }
-[data-editing="se"]#editBox #seEditBox,[data-editing="el"]#editBox #elEditBox{
+[data-editing="ex"]#editBox #exEditBox,[data-editing="se"]#editBox #seEditBox,[data-editing="el"]#editBox #elEditingBox{
 	display:block;
 }
 [data-edit-type="none"]#elEditBox{
@@ -138,15 +166,19 @@ input{
 	display:block;
 	margin:10px 0;
 	width:40%;
+	background-color:rgba(0,0,0,0.05);
+	border-radius:1px;
 }
 input[type="file"]{
 	display:none;
 }
 input:hover{
 	border-bottom-color:rgba(0,0,0,0.5);
+	background-color:rgba(0,0,0,0.075);
 }
 input:focus{
 	border-bottom-color:cornflowerblue;
+	background-color:rgba(100,149,237,0.1);
 }
 button{
 	display:inline-flex;
@@ -165,9 +197,24 @@ button{
 	color:black;
 	background-color:#00000018;
 }
+button:hover{
+	background-color:#00000029;
+}
 button *{
 	pointer-events:none;
 	margin:auto;
+}
+.create{
+	background-color:#23ff33dd;
+}
+.create:hover{
+	background-color:#23ff33ee;
+}
+.warning{
+	background-color:#ffdd00dd;
+}
+.warning:hover{
+	background-color:#ffee00ee;
 }
 .danger{
 	background-color:#ff2333dd;
