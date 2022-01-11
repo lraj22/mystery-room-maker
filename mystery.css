@@ -237,6 +237,7 @@ textarea{
 	width:100%;
 	height:200px;
 	resize:vertical;
+	margin:10px 0;
 }
 .mysteryEl img{
 	max-width:100%;
