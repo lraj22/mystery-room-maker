@@ -137,6 +137,44 @@ function activateElEditBox(){
 	};
 }
 var clickFn={
+	"downloadMystery":function(){
+		var mystery={
+			"title":mysteryTitle.textContent,
+			"content":[],
+			"end":endMessage.textContent
+		};
+		var sections=document.querySelectorAll(".section");
+		sections.forEach(function(section){
+			var s={
+				"header":section.querySelector(".sHeader h1").textContent,
+				"elements":[]
+			};
+			var elements=section.querySelectorAll(".mysteryEl");
+			elements.forEach(function(element){
+				var e={
+					"type":{"text":0,"question":1,"image":2}[element.getAttribute("data-el-type")]
+				};
+				var content=element.childNodes[1];
+				if(e.type===0)e.text=content.textContent;
+				else if(e.type===1){
+					e.question=content.firstElementChild.textContent;
+					e.answer=content.lastElementChild.getAttribute("data-answer");
+				}else if(e.type===2){
+					e.uri=content.firstElementChild.src;
+					e.caption=content.lastElementChild.textContent;
+				}
+				s.elements.push(e);
+			});
+			mystery.content.push(s);
+		});
+		var dl=document.createElement("a");
+		dl.href="data:text/plain;base64,"+btoa(JSON.stringify(mystery));
+		dl.download=((mystery.title.replace(/[^a-zA-Z ]/mg,"").split(" ").join("-"))||"Untitled-Mystery")+".escr";
+		dl.style.display="none";
+		document.body.appendChild(dl);
+		dl.click();
+		dl.remove();
+	},
 	"editSe":function(e){
 		select(e.parentElement.parentElement.parentElement);
 		editBox.setAttribute("data-editing","se");
