@@ -70,6 +70,43 @@ function activateExEditBox(){
 	onEdit(endMessageInput,function(){
 		endMessage.textContent=endMessageInput.value;
 	});
+	mysteryUpload.onchange=function(){
+		if(mysteryUpload.files.length!==0){
+			var file=mysteryUpload.files[0];
+			var fr=new FileReader();
+			fr.onload=function(){
+				var mystery=JSON.parse(fr.result);
+				mysteryTitle.textContent=mysteryTitleInput.value=mystery.title;
+				endMessage.textContent=endMessageInput.value=mystery.end;
+				document.querySelectorAll(".section").forEach(function(section){
+					section.remove();
+				});
+				mystery.content.forEach(function(section){
+					var s=getNewSe();
+					s.firstElementChild.lastElementChild.textContent=section.header;
+					section.elements.forEach(function(element){
+						var e=getNewEl();
+						e.setAttribute("data-el-type",["text","question","image"][element.type]);
+						var content=e.childNodes[1];
+						if(element.type===0){
+							content.textContent=element.text;
+						}else if(element.type===1){
+							content.innerHTML='<p></p><input readonly="readonly" data-answer=""/>';
+							content.firstElementChild.textContent=element.question;
+							content.lastElementChild.setAttribute("data-answer",element.answer);
+						}else if(element.type===2){
+							content.innerHTML='<img/><p class="caption"></p>';
+							content.firstElementChild.src=element.uri;
+							content.lastElementChild.textContent=element.caption;
+						}
+						s.insertBefore(e,s.lastElementChild);
+					});
+					mysteryView.insertBefore(s,mysteryView.lastElementChild.previousElementSibling);
+				});
+			};
+			fr.readAsText(file);
+		}
+	};
 }
 function activateSeEditBox(){
 	var selected=document.querySelector(".selected");
@@ -80,14 +117,17 @@ function activateSeEditBox(){
 		selected.querySelector(".sHeader h1").textContent=seTitle.value;
 	});
 }
-function updateElFromEdit(){
+function updateEditFromEl(){
 	var selected=document.querySelector(".selected");
 	var type=selected.getAttribute("data-el-type");
 	var content=selected.childNodes[1];
-	if(type==="text")elText.value=content.textContent;
-	else if(type==="question"){
-		questionText.value=content.childNodes[0].textContent;
-		questionAns.value=content.childNodes[1].getAttribute("data-answer");
+	if(type==="text"){
+		elText.value=content.textContent;
+	}else if(type==="question"){
+		questionText.value=content.firstElementChild.textContent;
+		questionAns.value=content.lastElementChild.getAttribute("data-answer");
+	}else if(type==="image"){
+		imageCaption.value=content.lastElementChild.textContent;
 	}
 }
 function activateElEditBox(){
@@ -99,7 +139,7 @@ function activateElEditBox(){
 	elEditBox.setAttribute("data-edit-type",type);
 	editTypeSelect.querySelector('option[selected="selected"]').removeAttribute("selected");
 	editTypeSelect.querySelector('option[value="'+type+'"]').setAttribute("selected","selected");
-	updateElFromEdit();
+	updateEditFromEl();
 	editTypeSelect.onchange=function(){
 		var type=editTypeSelect.value;
 		selected.setAttribute("data-el-type",type);
@@ -137,6 +177,9 @@ function activateElEditBox(){
 	};
 }
 var clickFn={
+	"promptUploadMystery":function(){
+		mysteryUpload.click();
+	},
 	"downloadMystery":function(){
 		var mystery={
 			"title":mysteryTitle.textContent,
