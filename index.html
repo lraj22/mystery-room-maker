@@ -6,7 +6,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta name="description" content="Make a Mystery Room!"/>
 		<title>Mystery Room Maker</title>
+		<link rel="preload"  as="style" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+		<link rel="preload" as="style" href="./common.css"/>
+		<link rel="stylesheet" href="./common.css"/>
 		<link rel="stylesheet" href="./mystery.css"/>
 	</head>
 	<body>
@@ -36,17 +39,17 @@
 			<div id="editBox" data-editing="ex">
 				<div id="exEditBox">
 					<h2>General</h2>
-					<p>Mystery title</p>
+					<label for="mysteryTitleInput">Mystery title</label>
 					<input id="mysteryTitleInput"/><br/>
-					<p>Mystery finishers see this message:</p>
+					<label for="endMessageInput">Mystery finishers see this message:</label>
 					<textarea id="endMessageInput"></textarea>
-					<button id="uploadMystery" class="action" data-click-fn="promptUploadMystery"><span class="material-icons md-text">&#xf09b;</span><span>Upload .escr File</span></button>
+					<button id="uploadMystery" class="action" data-click-fn="promptUpload"><span class="material-icons md-text">&#xf09b;</span><label for="mysteryUpload">Upload .escr File</label></button>
 					<input type="file" accept=".escr" id="mysteryUpload"/>
 					<button id="downloadMystery" class="action" data-click-fn="downloadMystery"><span class="material-icons md-text">&#xf090;</span><span>Download .escr File</span></button>
 				</div>
 				<div id="seEditBox">
 					<h2>Section Editor</h2>
-					<p>Title of section:</p>
+					<label for="seTitle">Title of section:</label>
 					<input id="seTitle"/>
 					<br/><hr/><br/>
 					<button id="insertSeAbove" class="create" data-click-fn="insertSeAbove">Insert Section Above</button>
@@ -58,25 +61,25 @@
 				</div>
 				<div id="elEditBox" data-edit-type="none">
 					<h2>Element Editor</h2>
-					<p>Current type: <select id="editTypeSelect">
+					<p><label for="editTypeSelect">Current type:</label> <select id="editTypeSelect">
 						<option value="text" selected="selected">Text</option>
 						<option value="question">Question</option>
 						<option value="image">Image</option>
 					</select></p><br/>
 					<div id="editText">
-						<p>Content of text element:</p>
+						<label for="elText">Content of text element:</label>
 						<textarea id="elText"></textarea>
 					</div>
 					<div id="editQuestion">
-						<p>Question:</p>
+						<label for="questionText">Question:</label>
 						<input id="questionText"/>
-						<p>Answer:</p>
+						<label for="questionAns">Answer:</label>
 						<input id="questionAns"/>
 					</div>
 					<div id="editImage">
-						<button class="action" data-click-fn="promptImageUpload"><span class="material-icons md-text">&#xe2c6;</span><span>Upload Image</span></button>
+						<button class="action" data-click-fn="promptUpload"><span class="material-icons md-text">&#xe2c6;</span><label for="imageFile">Upload Image</label></button>
 						<input type="file" id="imageFile" accept="image/*"/><br/><br/>
-						<p>Caption of the image (optional):</p>
+						<label for="imageCaption">Caption of the image (optional):</label>
 						<input id="imageCaption"/>
 					</div>
 					<br/><hr/><br/>
@@ -89,6 +92,6 @@
 				</div>
 			</div>
 		</div>
-		<script src="./mystery.js"></script>
+		<script defer src="./mystery.js"></script>
 	</body>
 </html>

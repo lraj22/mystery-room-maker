@@ -177,8 +177,8 @@ function activateElEditBox(){
 	};
 }
 var clickFn={
-	"promptUploadMystery":function(){
-		mysteryUpload.click();
+	"promptUpload":function(e){
+		e.nextElementSibling.click();
 	},
 	"downloadMystery":function(){
 		var mystery={
@@ -302,9 +302,6 @@ var clickFn={
 		var selected=document.querySelector(".selected");
 		clickFn.editSe(selected.parentElement.querySelector(".sHeader .material-icons"));
 		selected.remove();
-	},
-	"promptImageUpload":function(){
-		imageFile.click();
 	},
 	"deselect":function(){
 		deselect();
