@@ -21,7 +21,6 @@ body{
 	}
 }
 #mysteryView{
-	width:40%;
 	overflow:hidden auto;
 }
 #separator{
@@ -35,8 +34,6 @@ body{
 	width:60%;
 }
 .mysteryEl{
-	border:1px solid rgba(0,0,0,0.3);
-	margin:12px;
 	display:flex;
 	transition:all 500ms;
 }
@@ -51,18 +48,6 @@ body{
 }
 .section.selected .sHeader .material-icons,.mysteryEl.selected .material-icons{
 	color:green;
-}
-#mysteryTitle{
-	text-align:center;
-	margin:0;
-	padding:0.5em 0;
-	background-color:rgba(255,255,255,0.8);
-	border-bottom:2px dashed black;
-	position:sticky;
-	top:0;
-}
-#mysteryTitle:empty{
-	display:none;
 }
 #endMessage{
 	text-align:center;
@@ -101,11 +86,7 @@ body{
 	padding:5px 10px;
 }
 .elContent{
-	padding:20px 15px;
 	flex-grow:1;
-}
-#endMessage,[data-el-type="text"] .elContent{
-	white-space:pre-wrap;
 }
 #editPanel,#editPanel input,#editPanel textarea{
 	font-size:18px;
@@ -141,11 +122,4 @@ body{
 [data-el-type="question"].mysteryEl .elContent p:empty:before{
 	color:rgba(0,0,0,0.5);
 	content:"Enter question";
-}
-.caption{
-	font-size:smaller;
-	color:rgba(0,0,0,0.8);
-}
-.mysteryEl img{
-	max-width:100%;
 }
