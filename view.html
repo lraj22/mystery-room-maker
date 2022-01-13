@@ -12,7 +12,15 @@
 		<link rel="stylesheet" href="./common.css"/>
 		<link rel="stylesheet" href="./view.css"/>
 	</head>
-	<body>
+	<body class="noMystery">
+		<div id="defaultScreen">
+			<p>Upload an .escr file to view the mystery contained inside:</p>
+			<button id="uploadMystery" class="action" data-click-fn="promptUpload"><span class="material-icons md-text">&#xf09b;</span><label for="mysteryUpload">Upload .escr File</label></button>
+			<input type="file" accept=".escr" id="mysteryUpload"/>
+		</div>
+		<div id="mysteryView">
+			<h1 id="mysteryTitle"></h1>
+		</div>
 		<script defer src="./view.js"></script>
 	</body>
 </html>

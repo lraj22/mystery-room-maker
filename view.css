@@ -1,0 +1,51 @@
+body{
+	overflow:hidden auto;
+}
+@media only screen and (max-width:1000px){
+	#mysteryView{
+		width:50%;
+	}
+}
+@media only screen and (max-width:800px){
+	#mysteryView{
+		width:60%;
+	}
+}
+@media only screen and (max-width:650px){
+	#mysteryView{
+		width:70%;
+	}
+}
+@media only screen and (max-width:500px){
+	#mysteryView{
+		width:80%;
+	}
+}
+@media only screen and (max-width:400px){
+	#mysteryView{
+		width:100%;
+	}
+}
+#defaultScreen{
+	position:fixed;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	text-align:center;
+	display:none;
+}
+#mysteryView{
+	position:absolute;
+	left:50%;
+	transform:translateX(-50%);
+	display:none;
+}
+.sHeader{
+	text-align:center;
+}
+.mysteryEl,.mysteryEl *{
+	font-size:18px;
+}
+.noMystery #defaultScreen,.mysteryMode #mysteryView{
+	display:block;
+}
