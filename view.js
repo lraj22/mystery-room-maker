@@ -21,6 +21,39 @@ function getNewEl(){
 	part.appendChild(content);
 	return part;
 }
+function nextToView(ntv){
+	var viewingNow=document.querySelector(".viewingNow");
+	if(viewingNow&&(ntv==="next")){
+		var allFinished=true;
+		var questions=viewingNow.querySelectorAll("input[data-answer");
+		if(questions)questions.forEach(function(q){
+			if(q.value!==q.getAttribute("data-answer"))allFinished=false;
+		});
+		if(!allFinished)return;
+	}
+	window.scrollTo(0,0);
+	if(viewingNow){
+		viewingNow.classList.remove("viewingNow");
+		viewingNow[ntv+"ElementSibling"].classList.add("viewingNow");
+	}else{
+		mysteryView.querySelector("div").classList.add("viewingNow");
+	}
+	mysteryView.className="";
+	if(mysteryState.pos===mysteryState.total)return;
+	if(mysteryState.pos!==0){
+		mysteryView.classList.add("allowBack");
+	}
+	if(mysteryState.pos<(mysteryState.total-1)){
+		mysteryView.classList.add("allowForward");
+	}
+	if(mysteryState.pos===(mysteryState.total-1)){
+		mysteryView.classList.add("allowFinish");
+	}
+}
+var mysteryState={
+	"pos":-1,
+	"total":0
+};
 function waitForUpload(){
 	mysteryUpload.onchange=function(){
 		if(mysteryUpload.files.length!==0){
@@ -29,7 +62,7 @@ function waitForUpload(){
 			fr.onload=function(){
 				var mystery=JSON.parse(fr.result);
 				mysteryTitle.textContent=mystery.title;
-				//endMessage.textContent=mystery.end;
+				endMessage.textContent=mystery.end;
 				mystery.content.forEach(function(section){
 					var s=getNewSe();
 					s.firstElementChild.firstElementChild.textContent=section.header;
@@ -50,8 +83,10 @@ function waitForUpload(){
 						}
 						s.appendChild(e);
 					});
-					mysteryView.appendChild(s);
+					mysteryView.insertBefore(s,mysteryCompleted);
 				});
+				mysteryState.total=mystery.content.length;
+				clickFn.mysteryForward();
 				document.body.className="mysteryMode";
 			};
 			fr.readAsText(file);
@@ -61,6 +96,19 @@ function waitForUpload(){
 var clickFn={
 	"promptUpload":function(e){
 		e.nextElementSibling.click();
+	},
+	"mysteryBack":function(){
+		if(mysteryState.pos<1)return;
+		mysteryState.pos--;
+		nextToView("previous");
+	},
+	"mysteryForward":function(){
+		if(mysteryState.pos>=mysteryState.total)return;
+		mysteryState.pos++;
+		nextToView("next");
+	},
+	"mysteryFinish":function(){
+		clickFn.mysteryForward();
 	}
 };
 window.addEventListener("load",function(){

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html>
 	<head>
 		<meta charset="UTF-8"/>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -20,6 +20,13 @@
 		</div>
 		<div id="mysteryView">
 			<h1 id="mysteryTitle"></h1>
+			<div id="mysteryCompleted">
+				<h2>Mystery Completed!</h2>
+				<p id="endMessage"></p>
+			</div>
+			<button id="mysteryBack" data-click-fn="mysteryBack"><span class="material-icons md-text">&#xe5c4;</span><span>Back</span></button>
+			<button id="mysteryForward" data-click-fn="mysteryForward"><span>Next</span><span class="material-icons md-text">&#xe5c8;</span></button>
+			<button id="mysteryFinish" data-click-fn="mysteryFinish"><span class="material-icons md-text">&#xe876;</span><span>Finish</span></button>
 		</div>
 		<script defer src="./view.js"></script>
 	</body>
