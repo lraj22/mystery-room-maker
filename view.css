@@ -1,3 +1,6 @@
+html{
+	scroll-behavior:smooth;
+}
 body{
 	overflow:hidden auto;
 }
@@ -40,12 +43,15 @@ body{
 	transform:translateX(-50%);
 	display:none;
 }
-.sHeader{
-	text-align:center;
+.section,#mysteryCompleted,#mysteryBack,#mysteryForward,#mysteryFinish{
+	display:none;
 }
-.mysteryEl,.mysteryEl *{
+.mysteryEl,.mysteryEl *,#endMessage{
 	font-size:18px;
 }
-.noMystery #defaultScreen,.mysteryMode #mysteryView{
+.noMystery #defaultScreen,.mysteryMode #mysteryView,#mysteryView div.viewingNow{
 	display:block;
+}
+.allowBack#mysteryView #mysteryBack,.allowForward#mysteryView #mysteryForward,.allowFinish#mysteryView #mysteryFinish{
+	display:inline-block;
 }

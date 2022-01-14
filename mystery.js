@@ -218,6 +218,9 @@ var clickFn={
 		dl.click();
 		dl.remove();
 	},
+	"goToViewer":function(){
+		window.open("./view.html","_blank");
+	},
 	"editSe":function(e){
 		select(e.parentElement.parentElement.parentElement);
 		editBox.setAttribute("data-editing","se");
@@ -239,19 +242,19 @@ var clickFn={
 		s.insertBefore(part,e.parentElement);
 		clickFn.editEl(part.childNodes[0].childNodes[0]);
 	},
-	"insertSeAbove":function(e){
+	"insertSeAbove":function(){
 		var selected=document.querySelector(".selected");
 		selected.parentElement.insertBefore(getNewSe(),selected);
 	},
-	"insertSeBelow":function(e){
+	"insertSeBelow":function(){
 		var selected=document.querySelector(".selected");
 		selected.parentElement.insertBefore(getNewSe(),selected.nextElementSibling);
 	},
-	"insertElAbove":function(e){
+	"insertElAbove":function(){
 		var selected=document.querySelector(".selected");
 		selected.parentElement.insertBefore(getNewEl(),selected);
 	},
-	"insertElBelow":function(e){
+	"insertElBelow":function(){
 		var selected=document.querySelector(".selected");
 		selected.parentElement.insertBefore(getNewEl(),selected.nextElementSibling);
 	},
